@@ -38,7 +38,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'linebreak-style': [
       'error',
-      'windows'
+      'unix'
     ],
     'quotes': [
       'error',
