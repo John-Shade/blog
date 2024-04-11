@@ -1,0 +1,76 @@
+.body {
+  background-color: rgba(235, 238, 243, 1);
+  /* background-color: black; */
+}
+
+.header {
+  /* color: */
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.header--name {
+  /* text-align: left; */
+  color: rgba(0, 0, 0, 0.85);
+
+  /* font-family: Inter UI; */
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.header-link {
+  /* width: 84px; */
+
+  /* height: 35px; */
+
+  /* top: 22px;
+    left: 1206px; */
+
+  /* font-family: Inter; */
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  margin-left: 35px;
+  /* gap:20px; */
+}
+
+.header-button {
+  width: 109px;
+  height: 51px;
+  border-radius: 5px;
+  color: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  box-sizing: border-box;
+  margin-left: 35px;
+  padding: 0;
+}
+
+.header-img {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 50%;
+  /* align-items: cent er; */
+}
+
+.header-profile {
+  display: flex;
+  justify-content: baseline;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+}

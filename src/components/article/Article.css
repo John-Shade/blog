@@ -1,0 +1,17 @@
+.article-container--body {
+  width: 938px;
+  padding: 16px;
+
+  box-sizing: border-box;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.75);
+
+  font-family: Inter UI;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  white-space: pre-wrap;
+  word-break: break-all;
+}

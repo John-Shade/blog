@@ -1,0 +1,195 @@
+.form {
+  width: 384px;
+  display: flex;
+  align-items: center;
+  gap: 21px;
+
+  flex-direction: column;
+
+  background-color: white;
+
+  border-radius: 6px;
+  border: 1px solid rgba(217, 217, 217, 1);
+
+  margin: auto;
+  margin-top: 59px;
+
+  box-sizing: border-box;
+
+  padding: 48px 32px 48px 32px;
+  box-shadow:
+    inset 0px 0.6087964177131653px 2.9332919120788574px 0px
+      rgba(0, 0, 0, 0.0197),
+    0px 1.4630224704742432px 7.049108028411865px 0px rgba(0, 0, 0, 0.0283),
+    0px 2.7547414302825928px 13.272845268249512px 0px rgba(0, 0, 0, 0.035),
+    0px 4.91398811340332px 23.67648696899414px 0px rgba(0, 0, 0, 0.0417),
+    0px 9.19107437133789px 44.28426742553711px 0px rgba(0, 0, 0, 0.0503),
+    0px 22px 106px 0px rgba(0, 0, 0, 0.07);
+}
+
+.form-title {
+  color: rgba(38, 38, 38, 1);
+
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  margin: 0;
+}
+
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-input {
+  width: 320px;
+  height: 40px;
+
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(89, 89, 89, 1);
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  color: rgba(38, 38, 38, 1);
+}
+
+.form-agreement {
+  display: flex;
+  flex-direction: row;
+
+  width: 320px;
+  gap: 5px;
+
+  color: rgba(89, 89, 89, 1);
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  border-top: 1px solid rgba(232, 232, 232, 1);
+
+  box-sizing: border-box;
+}
+
+.form-button {
+  width: 319px;
+  height: 40px;
+  gap: 10px;
+
+  color: white;
+  background-color: rgba(24, 144, 255, 1);
+
+  height: 40px;
+  padding: 8px, 16px, 8px, 16px;
+  border-radius: 4px;
+  gap: 4px;
+  border: 0px;
+}
+
+.form-footer-container {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.form-footer--text {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.form-footer--text--normal {
+  color: rgba(140, 140, 140, 1);
+}
+
+.form-footer--text--link {
+  color: rgba(24, 144, 255, 1);
+  margin-left: 4px;
+}
+
+button:disabled {
+  opacity: 0.4;
+}
+
+.form-error {
+  color: rgba(245, 34, 45, 1);
+  margin: 0;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.form--article {
+  width: 938px;
+}
+
+.form-input--article {
+  width: 874px;
+}
+
+.form-input-text--article {
+  height: 168px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.tag-button {
+  height: 40px;
+  background-color: transparent;
+}
+
+.tag-button--delete {
+  width: 120px;
+  color: rgba(245, 34, 45, 1);
+  border: 1px solid rgba(245, 34, 45, 1);
+}
+
+.tag-button--add {
+  width: 136px;
+  color: rgba(24, 144, 255, 1);
+  border: 1px solid rgba(24, 144, 255, 1);
+}
+
+.tag-button--edit {
+  color: rgba(82, 196, 26, 1);
+  width: 65.23px;
+  border: 1px solid rgba(82, 196, 26, 1);
+}
+
+.article--user--with-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
