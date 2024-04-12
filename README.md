@@ -1,4 +1,4 @@
-https://blog-chi-coral-39.vercel.app/
+https://blog-chi-coral-39.vercel.app
 
 # Getting Started with Create React App
 
