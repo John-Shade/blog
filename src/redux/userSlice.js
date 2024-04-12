@@ -5,13 +5,13 @@ import { createtUser, getUser, getCurrentUser, updateUser } from '../api/api'
 const initialState = {
   userInfo: {
     username: null,
-    // password: null,
     token: null,
     email: null,
-    // bio: null,
     image: null,
   },
   isLoggedIn: undefined,
+  awaitingRequest: false,
+  mistake: false,
 }
 
 const userSlice = createSlice({
@@ -26,37 +26,56 @@ const userSlice = createSlice({
     changeIsLogged(state) {
       state.isLoggedIn = false
     },
+    changeMistake(state) {
+      state.mistake = false
+    },
   },
   extraReducers: (builder) => {
-    console.log('user extraReducers')
     builder
-      .addCase(createtUser.pending, () => {
-        console.log('createtUser pending')
+      .addCase(createtUser.pending, (state) => {
+        state.awaitingRequest = true
       })
-      .addCase(createtUser.fulfilled, () => {
-        console.log('createtUser fulfilled')
+      .addCase(createtUser.fulfilled, (state) => {
+        state.awaitingRequest = false
+        state.mistake = false
       })
       .addCase(createtUser.rejected, (state) => {
-        console.log('createtUser rejected')
         state.isLoggedIn = false
+        state.awaitingRequest = false
+        state.mistake = true
       })
-    builder.addCase(getUser.fulfilled, (state, action) => {
-      console.log('getUser fulfilled')
-      state.userInfo = action.payload
-      state.isLoggedIn = true
-      localStorage.setItem('token', action.payload.token)
-    })
+    builder
+      .addCase(getUser.pending, (state) => {
+        state.awaitingRequest = true
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.userInfo = action.payload
+        state.isLoggedIn = true
+        localStorage.setItem('token', action.payload.token)
+        state.awaitingRequest = false
+        state.mistake = false
+      })
+      .addCase(getUser.rejected, (state) => {
+        state.awaitingRequest = false
+        state.mistake = true
+      })
     builder.addCase(getCurrentUser.fulfilled, (state, action) => {
-      console.log('getCurrentUser fulfilled')
       state.userInfo = action.payload
       state.isLoggedIn = true
       localStorage.setItem('token', action.payload.token)
     })
-    builder.addCase(updateUser.fulfilled, (state, action) => {
-      console.log('updateUser fulfilled')
-      state.userInfo = action.payload
-      localStorage.setItem('token', action.payload.token)
-    })
+    builder
+      .addCase(updateUser.pending, (state) => {
+        state.awaitingRequest = true
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.userInfo = action.payload
+        localStorage.setItem('token', action.payload.token)
+        state.awaitingRequest = false
+      })
+      .addCase(updateUser.rejected, (state) => {
+        state.awaitingRequest = false
+      })
   },
 })
 

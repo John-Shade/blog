@@ -45,7 +45,8 @@ const getCurrentUser = createAsyncThunk('user/getCurrentUser', async () => {
 })
 
 const createArticle = async (article) => {
-  await instance.post('/articles', article)
+  const res = await instance.post('/articles', article)
+  return res.data
 }
 
 const updateUser = createAsyncThunk('user/updateUser', async (objUser) => {
@@ -74,17 +75,8 @@ const deleteArticle = async (slug) => {
 }
 
 instance.interceptors.request.use((config) => {
-  console.log('interceptors')
-  // if (
-  //   config.method === 'put' ||
-  //   config.url === '/user' ||
-  //   (config.url === '/articles' && config.method === 'post')
-  // ) {
-
-  // const { token } = store.getState().user.userInfo
   const token = localStorage.getItem('token')
   config.headers.Authorization = `Token ${token}`
-  // }
   return config
 })
 

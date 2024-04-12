@@ -2,10 +2,11 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import './Forms.css'
 import { updateUser } from '../../api/api'
-// import store from '../../redux/store'
 
 export default function EditProfileForm() {
   const dispatch = useDispatch()
+
+  const { awaitingRequest } = useSelector((state) => state.user)
 
   const {
     username: usernameState,
@@ -38,7 +39,6 @@ export default function EditProfileForm() {
     ) {
       setError('root', { message: 'Все значения остались прежними' })
     } else if (isValid && errors.root) {
-      console.log('clearErrors')
       clearErrors('root')
     }
   }
@@ -90,23 +90,6 @@ export default function EditProfileForm() {
               {errors.email ? errors.email.message : null}
             </p>
           </label>
-          {/* <label htmlFor="password" className="form-label">
-            New password */}
-          {/* <input type="password" id="password" className="form-input" /> */}
-          {/* <input
-              className="form-input"
-              id="password"
-              type="password"
-              {...register('password', {
-                required: 'Поле обязательно',
-                minLength: { value: 6, message: 'Минимум 6 символа' },
-                maxLength: { value: 40, message: 'Максимум 40 символов' },
-              })}
-            />
-            <p className="form-error">
-              {errors.password ? errors.password.message : null}
-            </p>
-          </label> */}
           <label htmlFor="img-link" className="form-label">
             Avatar image (url)
             <input
@@ -121,7 +104,11 @@ export default function EditProfileForm() {
           <p className="form-error">
             {errors.root ? errors.root.message : null}
           </p>
-          <button type="submit" className="form-button" disabled={!isValid}>
+          <button
+            type="submit"
+            className="form-button"
+            disabled={!isValid || awaitingRequest}
+          >
             Save
           </button>
         </div>

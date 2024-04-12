@@ -1,5 +1,5 @@
 import { Spin } from 'antd'
-import { LoadingOutlined } from '@ant-design/icons'
+import { LoadingOutlined, SyncOutlined } from '@ant-design/icons'
 
 import './Spinner.css'
 
@@ -15,6 +15,15 @@ export default function BigSpinner() {
           }}
         />
       }
+    />
+  )
+}
+
+export function HeaderSpinner() {
+  return (
+    <Spin
+      className="header-spinner"
+      indicator={<SyncOutlined spin style={{ fontSize: 45 }} />}
     />
   )
 }

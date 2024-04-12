@@ -29,7 +29,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "npx eslint ./src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -65,6 +71,7 @@
     "prettier": "3.2.5"
   },
   "lint-staged": {
+    
     "**/*": "prettier --write --ignore-unknown"
   }
 }

@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import './Forms.css'
-import { useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { createtUser } from '../../api/api'
+import useAction from '../../hooks/hooks'
 
 export default function CreateAccountForm() {
   const inputRef = useRef(null)
   const dispatch = useDispatch()
+  const { changeMistake } = useAction()
+  const timerRef = useRef()
+  const { awaitingRequest, mistake } = useSelector((state) => state.user)
 
   const {
     register,
@@ -22,6 +26,24 @@ export default function CreateAccountForm() {
       password: '',
     },
   })
+
+  useEffect(() => {
+    if (mistake) {
+      timerRef.current = setTimeout(() => {
+        changeMistake()
+      }, '4000')
+    }
+    // eslint-disable-next-line
+  }, [mistake])
+
+  useEffect(
+    () => () => {
+      clearTimeout(timerRef.current)
+      changeMistake()
+    },
+    // eslint-disable-next-line
+    []
+  )
 
   const errorMessage = 'Пароли не совпадают'
 
@@ -100,11 +122,6 @@ export default function CreateAccountForm() {
               className="form-input"
               type="password"
               {...rest}
-              // {...register('password', {
-              //   required: 'Поле обязательно',
-              //   minLength: { value: 6, message: 'Минимум  6 символа' },
-              //   maxLength: { value: 40, message: 'Максимум 40 символов' },
-              // })}
             />
             <p className="form-error">
               {errors.password ? errors.password.message : null}
@@ -113,18 +130,14 @@ export default function CreateAccountForm() {
           <label htmlFor="repeat-password" className="form-label">
             Repeat Password
             <input
-              type=""
+              type="password"
+              autoComplete="new-password"
               id="repeat-password"
               className="form-input"
               {...register('repeatPassword', {
                 required: 'Поле обязательно',
                 validate: (password) => {
-                  if (
-                    // inputRef.current
-                    //   ? inputRef.current.value
-                    //   : inputRef !== password
-                    inputRef.current.value !== password
-                  ) {
+                  if (inputRef.current.value !== password) {
                     return errorMessage
                   }
                   return null
@@ -144,7 +157,11 @@ export default function CreateAccountForm() {
           <span>I agree to the processing of my personal information</span>
         </div>
         <div className="form-footer-container">
-          <button type="submit" className="form-button" disabled={!isValid}>
+          <button
+            type="submit"
+            className="form-button"
+            disabled={!isValid || awaitingRequest}
+          >
             Create
           </button>
 
@@ -159,6 +176,7 @@ export default function CreateAccountForm() {
             </Link>
           </div>
         </div>
+        {mistake && <p className="form-error">Ошибка регистрации</p>}
       </form>
     </div>
   )

@@ -1,10 +1,15 @@
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
+import { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '../../api/api'
+import useAction from '../../hooks/hooks'
 import './Forms.css'
 
 export default function LoginForm() {
   const dispatch = useDispatch()
+  const { changeMistake } = useAction()
+  const timerRef = useRef()
+  const { awaitingRequest, mistake } = useSelector((state) => state.user)
 
   const {
     register,
@@ -16,6 +21,24 @@ export default function LoginForm() {
       password: '',
     },
   })
+
+  useEffect(() => {
+    if (mistake) {
+      timerRef.current = setTimeout(() => {
+        changeMistake()
+      }, '4000')
+    }
+    // eslint-disable-next-line
+  }, [mistake])
+
+  useEffect(
+    () => () => {
+      clearTimeout(timerRef.current)
+      changeMistake()
+    },
+    // eslint-disable-next-line
+    []
+  )
 
   const onSubmit = (data) => {
     const { email, password } = { ...data }
@@ -34,6 +57,7 @@ export default function LoginForm() {
             <input
               className="form-input"
               id="email"
+              autoComplete="email"
               type="email"
               {...register('email', {
                 required: 'Поле обязательно',
@@ -66,9 +90,14 @@ export default function LoginForm() {
             </p>
           </label>
         </div>
-        <button type="submit" className="form-button" disabled={!isValid}>
+        <button
+          type="submit"
+          className="form-button"
+          disabled={!isValid || awaitingRequest}
+        >
           Login
         </button>
+        {mistake && <p className="form-error">Ошибка авторизации</p>}
       </form>
     </div>
   )

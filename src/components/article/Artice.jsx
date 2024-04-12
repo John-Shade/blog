@@ -5,7 +5,6 @@ import ShortArticle from '../short-article'
 import { useGetData } from '../../hooks/hooks'
 
 export default function Article() {
-  // const { state } = useLocation()
   const { slug } = useParams()
   const { dataList } = useGetData()
   if (dataList) {

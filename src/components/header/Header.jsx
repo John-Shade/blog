@@ -4,10 +4,11 @@ import { useSelector } from 'react-redux'
 import './Header.css'
 import { Button } from 'antd'
 import useAction from '../../hooks/hooks'
+import { HeaderSpinner } from '../spinner/Spinner'
 
 export default function Header() {
   const { changeIndex, logout } = useAction()
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
+  const { isLoggedIn, awaitingRequest } = useSelector((state) => state.user)
   const { username, image } = useSelector((state) => state.user.userInfo)
 
   return (
@@ -15,6 +16,7 @@ export default function Header() {
       <Link to="/articles" onClick={() => changeIndex(1)}>
         <span className="header--name">Realworld Blog</span>
       </Link>
+      {awaitingRequest && <HeaderSpinner />}
       <div className="header-container">
         {!isLoggedIn && (
           <>

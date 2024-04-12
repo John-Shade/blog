@@ -1,11 +1,7 @@
-// import { Link } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
-// import { useParams, useResolvedPath, useOutletContext } from 'react-router-dom'
-// import { useOutletContext, Navigate } from 'react-router-dom'
 import { useOutletContext, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import './Forms.css'
-// import { useRef } from 'react'
 import { useEffect } from 'react'
 import { createArticle, updateArticle } from '../../api/api'
 
@@ -59,7 +55,10 @@ export default function ArticleForm() {
     const objArticle = { article }
     if (state)
       dispatch(updateArticle({ objArticle, slug })).then(() => navigate('../'))
-    else createArticle(objArticle).then(() => navigate('article'))
+    else
+      createArticle(objArticle).then((res) => {
+        navigate(`../articles/${res.article.slug}`)
+      })
   }
   return (
     <div>
@@ -74,8 +73,6 @@ export default function ArticleForm() {
               id="title"
               {...register('title', {
                 required: 'Поле обязательно',
-                // minLength: { value: 3, message: 'Минимум  3 символа' },
-                // maxLength: { value: 20, message: 'Максимум 20 символов' },
               })}
             />
             <p className="form-error">
@@ -90,10 +87,6 @@ export default function ArticleForm() {
               type="text"
               {...register('description', {
                 required: 'Поле обязательно',
-                // pattern: {
-                //   value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-                //   message: 'Введите корректный email',
-                // },
               })}
             />
             <p className="form-error">
@@ -102,17 +95,6 @@ export default function ArticleForm() {
           </label>
           <label htmlFor="text" className="form-label">
             Text
-            {/* <input type="password" id="password" className="form-input" /> */}
-            {/* <input
-              className="form-input form-input--article form-input-text--article"
-              id="text"
-              type="text"
-              {...register('password', {
-                required: 'Поле обязательно',
-                // minLength: { value: 6, message: 'Минимум 6 символа' },
-                // maxLength: { value: 40, message: 'Максимум 40 символов' },
-              })}
-            /> */}
             <textarea
               className="form-input form-input--article form-input-text--article"
               id="text"

@@ -13,15 +13,12 @@ const dataSlice = createSlice({
   initialState,
   reducers: {
     changeIndex(state, action) {
-      console.log('changeIndex')
       state.indexPage = action.payload
     },
     changeTotalCount(state, action) {
-      console.log('changeTotalCount')
       state.totalPages = action.payload
     },
     changeFavorite(state, action) {
-      console.log('changeFavorite')
       const ind = current(state.dataList).findIndex(
         (el) => el.slug === action.payload.slug
       )
@@ -36,31 +33,24 @@ const dataSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getArticles.pending, () => {
-        console.log('all pending')
-      })
+      .addCase(getArticles.pending, () => {})
       .addCase(getArticles.fulfilled, (state, action) => {
-        console.log('all fulfilled')
         state.dataList = action.payload.articles
         state.totalPages = action.payload.articlesCount
       })
     builder
       .addCase(getArticle.fulfilled, (state, action) => {
-        console.log('1 fulfilled')
         state.dataList = [action.payload.article]
       })
       .addCase(getArticles.rejected, (state) => {
-        console.log('all rejected')
         state.mistake = true
         // state.dataList = action.payload
       })
     builder
       .addCase(updateArticle.rejected, (state) => {
-        console.log('update rejected')
         state.mistake = true
       })
       .addCase(updateArticle.fulfilled, (state, action) => {
-        console.log('update fulfilled')
         const ind = current(state.dataList).findIndex(
           (el) => el.slug === action.payload.slug
         )
